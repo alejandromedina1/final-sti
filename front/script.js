@@ -17,7 +17,7 @@ const sendRequest = async () => {
     const userRequest = {
         usuario_referencia: name,
         k_vecinos: numberOfNeighbors,
-        metodo: aggregationMethod,
+        metodo_aggregation: aggregationMethod,
         N: numberOfMovies
     }
     postEndpoint(userRequest)
