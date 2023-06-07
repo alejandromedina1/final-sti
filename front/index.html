@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoviePals</title>
+</head>
+<body>
+    <h1>MoviePals</h1>
+
+    <h2>Select your name</h2>
+    <input type="text" placeholder="Your name" id="name-input">
+
+    <h2>Number of Neighbors</h2>
+    <input type="text" placeholder="Number of neighbors" id="neighbor-input">
+
+    <h2>How Many Movies would you like us to recommend?</h2>
+    <input type="number" id="amount-input" placeholder="Number of movies">
+    
+    <h2>Aggregation Method</h2>
+    <select name="" id="aggregation-dropdown">
+        <option value="-">-</option>
+        <option value="maximo">Maximum</option>
+        <option value="minimo">Minimum</option>
+        <option value="promedio">Average</option>
+        <option value="desviacion">Varianca</option>
+    </select>
+
+    <button id="recommendation-btn"> Recommend!</button>
+
+
+    <section id="neighborhood"></section>
+
+    <section id="recommendations"></section>
+</body>
+
+<script src="script.js"></script>
+</html>
