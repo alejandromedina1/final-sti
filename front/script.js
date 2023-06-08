@@ -1,12 +1,14 @@
 const DOMAIN = 'http://localhost:';
 const PORT = 5001;
 // Resources
-const RESOURCE = 'names';
+const RESOURCE = 'result';
 const POST_ROUTE = 'user-data';
+
+let result;
 
 const recommendationBtn = document.getElementById('recommendation-btn')
 
-recommendationBtn.addEventListener('click', async() => sendRequest())
+recommendationBtn.addEventListener('click', async () => sendRequest())
 
 const sendRequest = async () => {
     const name = document.getElementById('name-input').value
@@ -15,12 +17,15 @@ const sendRequest = async () => {
     const aggregationMethod = document.getElementById('aggregation-dropdown').value
 
     const userRequest = {
-        usuario_referencia: name,
-        k_vecinos: numberOfNeighbors,
-        metodo_aggregation: aggregationMethod,
+        usuario: name,
+        vecinos: numberOfNeighbors,
+        aggregation: aggregationMethod,
         N: numberOfMovies
     }
-    postEndpoint(userRequest)
+    await postEndpoint(userRequest)
+
+    const recommendationSection = document.getElementById('recommendations')
+
 
     console.log(userRequest)
 
@@ -28,8 +33,7 @@ const sendRequest = async () => {
 
 const postEndpoint = async (request) => {
     try {
-        const raw = await fetch(`${DOMAIN}${PORT}/${POST_ROUTE}`,
-        {
+        const raw = await fetch(`${DOMAIN}${PORT}/${POST_ROUTE}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -38,7 +42,24 @@ const postEndpoint = async (request) => {
         })
         const response = await raw.json()
         console.log(response)
+        result = response
+        
     } catch (error) {
         console.log(error)
     }
 }
+
+const getResult = async () => {
+    try {
+        const raw = await fetch(`${DOMAIN}${PORT}/${RESOURCE}`);
+        const response = await raw.json();
+        result = response
+        console.log(result)
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+
+
+

@@ -12,38 +12,13 @@ app = Flask(__name__)
 # Enable CORS policies
 CORS(app)
 
-
-
-@app.route('/user-data', methods=['POST'])
-def create_data():
-    # Get the data from the POST endpoint
-    data = request.get_json()
-    print(data)
-
-    
-    if not data:
-        return (jsonify({'error': 'No data provided'}), 400)
-    return (data)
-
-# Traer los datos de la interfaz
-
-# usuario_referencia = user_data.usuario_referencia
-# k_vecinos = user_data.k_vecinos
-# metodo_aggregation = user_data.metodo_aggregation
-# N = user_data.N
+#usuario_referencia = "Juan José Rodriguez"  # Nombre del usuario de referencia
 
 # Leer la base de datos con pandas
 
 def importar_base_datos(ruta_archivo):
     return pd.read_csv(ruta_archivo, index_col='Usuarios')
 
-# Se carga la base de datos de los usuarios
-df_usuarios = importar_base_datos('base_de_datos_usuarios.csv')
-print(df_usuarios)
-
-# Se guardan los usuarios en un arreglo para enviarlo al FRONT y que se pueda escoger al usuario con un dropdown
-usuarios = df_usuarios.index.tolist()
-print(usuarios)
 
 # Calcular la similitud coseno entre el usuario de referencia y los vecinos más cercanos
 def calcular_similitud_coseno(datos, usuario_referencia, k):
@@ -67,20 +42,13 @@ def calcular_similitud_coseno(datos, usuario_referencia, k):
 #usuario_referencia = "Juan José Rodriguez"  # Nombre del usuario de referencia
 #k_vecinos = 2  # Número de vecinos a considerar
 
-resultados_similitud = calcular_similitud_coseno(df_usuarios, usuario_referencia, k_vecinos)
-print(resultados_similitud)
+
 
 # Crear la protopersona basada en los vecinos más cercanos
 def crear_protopersona(datos, vecinos):
     protopersona = datos.loc[vecinos].mean()
     return protopersona
 
-# Utilizar los resultados de similitud para obtener los nombres de los vecinos más cercanos
-vecinos_cercanos = list(resultados_similitud.keys())
-
-# Crear la protopersona
-protopersona = crear_protopersona(df_usuarios, vecinos_cercanos)
-print(protopersona)
 
 # Función para calcular el máximo
 def calcular_maximo(datos, protopersona):
@@ -122,83 +90,121 @@ def obtener_categorias(datos, protopersona, metodo):
     categorias_dict = {categoria: protopersona[categoria] for categoria in categorias}
     return categorias_dict
 
+@app.route('/user-data', methods=['POST'])
+def create_data():
+    # Get the data from the POST endpoint
+    data = request.get_json()
+    print(data)
+
+    # Traer los datos de la interfaz
+    usuario_referencia = data['usuario']
+    k_vecinos = data['vecinos']
+    metodo_aggregation = data['aggregation']
+    N = data['N']
+
+    # Se carga la base de datos de los usuarios
+    df_usuarios = importar_base_datos('base_de_datos_usuarios.csv')
+    print(df_usuarios)
+
+    # Se guardan los usuarios en un arreglo para enviarlo al FRONT y que se pueda escoger al usuario con un dropdown
+    usuarios = df_usuarios.index.tolist()
+    print(usuarios)
+
+    resultados_similitud = calcular_similitud_coseno(df_usuarios, usuario_referencia, k_vecinos)
+    print(resultados_similitud)
+
+    # Utilizar los resultados de similitud para obtener los nombres de los vecinos más cercanos
+    vecinos_cercanos = list(resultados_similitud.keys())
+
+    # Crear la protopersona
+    protopersona = crear_protopersona(df_usuarios, vecinos_cercanos)
+    print(protopersona)
+
+
+    categorias_cumplen_requisito = obtener_categorias(df_usuarios, protopersona, metodo_aggregation)
+    print(categorias_cumplen_requisito)
+
+    df_peliculas = pd.read_csv('combined_movies_2.csv')
+    print(df_peliculas)
+
+    # Crear una lista con los nombres de los géneros
+    generos = list(categorias_cumplen_requisito.keys())
+
+    # Crear una lista con las calificaciones
+    calificaciones = list(categorias_cumplen_requisito.values())
+
+    # Crear un dataframe de una línea y dos columnas
+    data = {
+        "movie_name": ["Proto-pelicula"],
+        "genre": [generos]
+    }
+
+    df = pd.DataFrame(data)
+
+    print(df)
+
+
+    # Crear una nueva base de datos con las columnas de nombres de películas y géneros
+    new_data = df_peliculas[['movie_name', 'genre']].copy()
+
+    # Separar los géneros para cada película
+    new_data['genre'] = new_data['genre'].str.split(', ')
+
+    # Mostrar la nueva base de datos
+    print(new_data)
+
+
+    # Unir los dos dataframes
+    merged_data = pd.concat([new_data, df], ignore_index=True)
+
+    print(merged_data)
+
+
+    proto_generos = merged_data.loc[merged_data["movie_name"] == "Proto-pelicula", "genre"].iloc[0]
+
+    # Realizar el reemplazo de los géneros en las listas de géneros de las películas
+    merged_data["genre"] = merged_data["genre"].apply(lambda x: [1 if g in proto_generos else 0 for g in x])
+
+    # Mostrar el dataframe actualizado
+    print(merged_data)
+
+
+    # Obtener la lista de géneros de la proto-pelicula
+    proto_generos = merged_data.loc[merged_data["movie_name"] == "Proto-pelicula", "genre"].iloc[0]
+
+    # Ajustar las dimensiones de las listas de géneros de las películas
+    merged_data["genre"] = merged_data["genre"].apply(lambda x: x[:len(proto_generos)] if len(x) > len(proto_generos) else x + [0.5] * (len(proto_generos) - len(x)))
+
+    # Mostrar el dataframe actualizado
+    print(merged_data)
+
+
+    # Obtener la lista de géneros de la proto-pelicula
+    proto_generos = merged_data.loc[merged_data["movie_name"] == "Proto-pelicula", "genre"].iloc[0]
+
+    # Calcular la similitud coseno entre las películas y la proto-pelicula
+    merged_data["Similitud"] = merged_data["genre"].apply(lambda x: cosine_similarity([proto_generos], [x])[0][0])
+
+    # Ordenar las películas por similitud en orden descendente y excluir la proto-pelicula  
+    recomendaciones = merged_data[merged_data["movie_name"] != "Proto-pelicula"].sort_values(by="Similitud", ascending=False)
+
+    # Escoger el número N de películas recomendadas
+    #N = 5
+    recomendaciones = recomendaciones.head(N)
+
+    # Mostrar las películas recomendadas y su valor de similitud
+    print(recomendaciones[["movie_name", "Similitud"]]) 
+
+    arreglo_recomendaciones = recomendaciones[["movie_name", "Similitud"]].values
+
+    print(type(arreglo_recomendaciones), 'Hola')
+    if not data:
+        return (jsonify({'error': 'No data provided'}), 400)
+    return (jsonify({'resultados': arreglo_recomendaciones.tolist()}))
+
+
 
 #metodo_aggregation = 'maximo'  # Método de Aggregation a utilizar
-
-categorias_cumplen_requisito = obtener_categorias(df_usuarios, protopersona, metodo_aggregation)
-print(categorias_cumplen_requisito)
-
-df_peliculas = pd.read_csv('combined_movies_2.csv')
-print(df_peliculas)
-
-# Crear una lista con los nombres de los géneros
-generos = list(categorias_cumplen_requisito.keys())
-
-# Crear una lista con las calificaciones
-calificaciones = list(categorias_cumplen_requisito.values())
-
-# Crear un dataframe de una línea y dos columnas
-data = {
-    "movie_name": ["Proto-pelicula"],
-    "genre": [generos]
-}
-
-df = pd.DataFrame(data)
-
-print(df)
-
-
-# Crear una nueva base de datos con las columnas de nombres de películas y géneros
-new_data = df_peliculas[['movie_name', 'genre']].copy()
-
-# Separar los géneros para cada película
-new_data['genre'] = new_data['genre'].str.split(', ')
-
-# Mostrar la nueva base de datos
-print(new_data)
-
-
-# Unir los dos dataframes
-merged_data = pd.concat([new_data, df], ignore_index=True)
-
-print(merged_data)
-
-
-proto_generos = merged_data.loc[merged_data["movie_name"] == "Proto-pelicula", "genre"].iloc[0]
-
-# Realizar el reemplazo de los géneros en las listas de géneros de las películas
-merged_data["genre"] = merged_data["genre"].apply(lambda x: [1 if g in proto_generos else 0 for g in x])
-
-# Mostrar el dataframe actualizado
-print(merged_data)
-
-
-# Obtener la lista de géneros de la proto-pelicula
-proto_generos = merged_data.loc[merged_data["movie_name"] == "Proto-pelicula", "genre"].iloc[0]
-
-# Ajustar las dimensiones de las listas de géneros de las películas
-merged_data["genre"] = merged_data["genre"].apply(lambda x: x[:len(proto_generos)] if len(x) > len(proto_generos) else x + [0.5] * (len(proto_generos) - len(x)))
-
-# Mostrar el dataframe actualizado
-print(merged_data)
-
-
-# Obtener la lista de géneros de la proto-pelicula
-proto_generos = merged_data.loc[merged_data["movie_name"] == "Proto-pelicula", "genre"].iloc[0]
-
-# Calcular la similitud coseno entre las películas y la proto-pelicula
-merged_data["Similitud"] = merged_data["genre"].apply(lambda x: cosine_similarity([proto_generos], [x])[0][0])
-
-# Ordenar las películas por similitud en orden descendente y excluir la proto-pelicula
-recomendaciones = merged_data[merged_data["movie_name"] != "Proto-pelicula"].sort_values(by="Similitud", ascending=False)
-
-# Escoger el número N de películas recomendadas
-#N = 5
-recomendaciones = recomendaciones.head(N)
-
-# Mostrar las películas recomendadas y su valor de similitud
-print(recomendaciones[["movie_name", "Similitud"]])
-
 
 # Execute the app instance
 # The app will run locally in: http://localhost:5001/ after execution
