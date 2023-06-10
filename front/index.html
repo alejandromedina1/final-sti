@@ -10,10 +10,15 @@
     <h1>MoviePals</h1>
 
     <h2>Select your name</h2>
-    <input type="text" placeholder="Your name" id="name-input">
+    <select name="" id="name-input">
+        <option value="-">-</option>
+        <option value="Luisa Tapiero">Luisa Tapiero</option>
+        <option value="Juan José Rodriguez">Juan José Rodriguez</option>
+        <option value="Christian Aparicio">Christian Aparicio</option>
+    </select>
 
     <h2>Number of Neighbors</h2>
-    <input type="text" placeholder="Number of neighbors" id="neighbor-input">
+    <input type="number" placeholder="Number of neighbors" id="neighbor-input">
 
     <h2>How Many Movies would you like us to recommend?</h2>
     <input type="number" id="amount-input" placeholder="Number of movies">
@@ -29,10 +34,12 @@
 
     <button id="recommendation-btn"> Recommend!</button>
 
+    <div id="result-data"></div>
 
     <section id="neighborhood"></section>
 
     <section id="recommendations"></section>
+
 </body>
 
 <script src="script.js"></script>
