@@ -200,7 +200,7 @@ def create_data():
     print(type(arreglo_recomendaciones), 'Hola')
     if not data:
         return (jsonify({'error': 'No data provided'}), 400)
-    return (jsonify({'resultados': arreglo_recomendaciones.tolist()}))
+    return (jsonify({'resultados': arreglo_recomendaciones.tolist(), 'vecinos': vecinos_cercanos}))
 
 
 
