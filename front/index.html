@@ -75,12 +75,20 @@
 
             <div class="n-neighbors">
                 <p>How many people with similar tastes to yours would you like us to consider for the recommendation?</p>
-                <input type="number" placeholder="Number of neighbors" id="neighbor-input">
+                <div class="number-input">
+                    <button onclick="decreaseValue()">-</button>
+                        <input type="number" id="neighbor-input" value="0">
+                    <button onclick="increaseValue()">+</button>
+                </div>
             </div>
-            
+           
             <div class="n-movies">
                 <p>How Many Movies would you like us to recommend?</p>
-            <input type="number" id="amount-input" placeholder="Number of movies">
+                <div class="number-input">
+                    <button onclick="decreaseValue2()">-</button>
+                        <input type="number" id="amount-input" value="0">
+                    <button onclick="increaseValue2()">+</button>
+                </div>
             </div>
             
             <p class="type-n">What type of movies do you prefer for the recommendation?</p>

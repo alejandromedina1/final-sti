@@ -104,6 +104,8 @@ body {
 	cursor: pointer;
 	color: white;
 	font-size: 20px;
+	margin-top: 5%;
+	margin-bottom: 10%;
 }
 
 #recommendation-btn:hover {
@@ -135,6 +137,56 @@ body {
 	margin-top: 2%;
 }
 
+/* Input number */
+
+.number-input input[type="number"] {
+    background-color: transparent;
+    border: none;
+	color: white;
+	font-size: 20px;
+  }
+
+.number-input {
+	width: 25%;
+	height: 55px;
+	background: #212332;
+	box-shadow: -4.55922px -4.55922px 18.2369px rgba(152, 152, 152, 0.09), 9.11844px 18.2369px 36.4737px rgba(0, 0, 0, 0.25);
+	border-radius: 31.9145px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+	padding: 2%;
+  }
+
+  .number-input input {
+    text-align: center;
+    width: 20%;
+  }
+
+  .number-input button {
+	background: linear-gradient(139.61deg, #A66AEA -17.83%, #685DE7 187.71%);
+	box-shadow: -0.919704px -0.919704px 10.1167px rgba(166, 106, 234, 0.24), 1.83941px 3.67882px 9.19704px rgba(0, 0, 0, 0.41), inset 1.83941px 1.83941px 5.51823px rgba(237, 198, 255, 0.22), inset -3.67882px -3.67882px 7.35764px #3F3388;
+	border: 3.67882px solid #202231;
+	width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    padding: 5px;
+    background-color: #ddd;
+    cursor: pointer;
+	color: white;
+  }
+
+  .number-input button:hover {
+	background: linear-gradient(127.77deg, #852aec -34.93%, #685DE7 148.63%);
+  }
+
+  .number-input input[type="number"]::-webkit-inner-spin-button,
+  .number-input input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
 /* //////////////////////////////////////////////////////////////// */
 
 .logo-container {
@@ -145,7 +197,7 @@ body {
 }
 
 .logo2 {
-	width: 30%;
+	width: 25%;
 	margin-bottom: 2%;
 }
 

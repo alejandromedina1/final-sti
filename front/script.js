@@ -10,6 +10,37 @@ const recommendationBtn = document.getElementById('recommendation-btn')
 
 recommendationBtn.addEventListener('click', async () => sendRequest())
 
+//Value input number
+function decreaseValue() {
+    var value = parseInt(document.getElementById('neighbor-input').value);
+    value = isNaN(value) ? 0 : value;
+    value--;
+    document.getElementById('neighbor-input').value = value < 0 ? 0 : value;
+}
+
+  function increaseValue() {
+    var value = parseInt(document.getElementById('neighbor-input').value);
+    value = isNaN(value) ? 0 : value;
+    value++;
+    document.getElementById('neighbor-input').value = value;
+}
+  
+function decreaseValue2() {
+    var value = parseInt(document.getElementById('amount-input').value);
+    value = isNaN(value) ? 0 : value;
+    value--;
+    document.getElementById('amount-input').value = value < 0 ? 0 : value;
+}
+
+  function increaseValue2() {
+    var value = parseInt(document.getElementById('amount-input').value);
+    value = isNaN(value) ? 0 : value;
+    value++;
+    document.getElementById('amount-input').value = value;
+}
+  
+
+
 const sendRequest = async () => {
     const name = document.getElementById('name-input').value
     const numberOfNeighbors = parseInt(document.getElementById('neighbor-input').value)
