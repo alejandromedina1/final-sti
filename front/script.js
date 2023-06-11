@@ -10,6 +10,37 @@ const recommendationBtn = document.getElementById('recommendation-btn')
 
 recommendationBtn.addEventListener('click', async () => sendRequest())
 
+//Value input number
+function decreaseValue() {
+    var value = parseInt(document.getElementById('neighbor-input').value);
+    value = isNaN(value) ? 0 : value;
+    value--;
+    document.getElementById('neighbor-input').value = value < 0 ? 0 : value;
+}
+
+  function increaseValue() {
+    var value = parseInt(document.getElementById('neighbor-input').value);
+    value = isNaN(value) ? 0 : value;
+    value++;
+    document.getElementById('neighbor-input').value = value;
+}
+  
+function decreaseValue2() {
+    var value = parseInt(document.getElementById('amount-input').value);
+    value = isNaN(value) ? 0 : value;
+    value--;
+    document.getElementById('amount-input').value = value < 0 ? 0 : value;
+}
+
+  function increaseValue2() {
+    var value = parseInt(document.getElementById('amount-input').value);
+    value = isNaN(value) ? 0 : value;
+    value++;
+    document.getElementById('amount-input').value = value;
+}
+  
+
+
 const sendRequest = async () => {
     const name = document.getElementById('name-input').value
     const numberOfNeighbors = parseInt(document.getElementById('neighbor-input').value)
@@ -26,13 +57,13 @@ const sendRequest = async () => {
 
     console.log(userRequest)
 
-    function obtainUsers() {
+    /*function obtainUsers() {
         const app = document.getElementById('recommendations');
         app.innerHTML = `
         <p>"${userRequest.usuario}"</p>  `
     }
     
-    obtainUsers();
+    obtainUsers();*/
 
     function changeScreen() {
         var screen1 = document.querySelector('.data-filter');
@@ -70,26 +101,55 @@ const postEndpoint = async (request) => {
         result = response
 
         function obtainMovies() {
-            const app1 = document.getElementById('neighborhood');
-            app1.innerHTML = `
-            <p>"${response.resultados[0][0]}"</p>
-              `
-
-            const resultDataElement = document.getElementById('result-data');
+            const resultDataElement = document.getElementById('cards-neighbors');
+            const resultDataElement2 = document.getElementById('cards-movies');
             let resultHTML = '';
+            let resultHTML2 = '';
 
             for (let i = 0; i < response.resultados.length; i++) {
-                resultHTML += `<p>${response.resultados[i][0]}</p>`;
-                resultHTML += `<p>${response.resultados[i][1]}</p>`;
-                resultHTML += `<p>${response.vecinos[i]}</p>`;
-                
+                var numeroDecimal = response.resultados[i][1];
+                var decimales = 3;
+            
+                function decimalAPorcentaje(numeroDecimal, decimales) {
+                    const factor = Math.pow(10, decimales);
+                    const numeroAcortado = Math.round(numeroDecimal * factor) / factor;
+                    
+                    const porcentaje = numeroAcortado * 100;
+                    
+                    return porcentaje;
+                }
+
+                var porcentaje = decimalAPorcentaje(numeroDecimal, decimales);
+            
+                //resultHTML += `<p>${response.resultados[i][0]}</p>`;
+                //resultHTML += `<p>${porcentaje}%</p>`;
+                resultHTML += `
+                                    <div class="neighbors-info">
+                                        <img src="/front/img/profile.png" alt="">
+                                        <p>${response.vecinos[i]}</p>
+                                    </div>`;
+                resultHTML2 += `
+                <div class="neighbors-movie">
+                    <div class="info-movie">
+                        <img src="/front/img/star.png" alt="">
+                        <p>${response.resultados[i][0]}</p>
+                    </div>
+
+                    <div class="info-percent">
+                        <h6>${porcentaje}%</h6>
+                        <p>Recommended</p>
+                    </div>
+                </div>`;
+                //resultHTML += `<p>${response.vecinos[i]}</p>`;
+                  
             }
 
             console.log(response.resultados);
 
             resultDataElement.innerHTML = resultHTML;
+            resultDataElement2.innerHTML = resultHTML2;
         }
-        
+
         obtainMovies();
         
     } catch (error) {
@@ -98,6 +158,9 @@ const postEndpoint = async (request) => {
 
 }
 
+function backPage() {
+    location.reload(); 
+  }
 
 const getResult = async () => {
     try {

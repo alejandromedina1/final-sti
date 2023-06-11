@@ -124,7 +124,7 @@ def create_data():
     categorias_cumplen_requisito = obtener_categorias(df_usuarios, protopersona, metodo_aggregation)
     print(categorias_cumplen_requisito)
 
-    df_peliculas = pd.read_csv('combined_movies_2.csv')
+    df_peliculas = pd.read_csv('recommendations.csv')
     print(df_peliculas)
 
     # Crear una lista con los nombres de los géneros

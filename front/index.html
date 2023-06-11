@@ -5,6 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@400;700&display=swap" rel="stylesheet">
     <title>MoviePals</title>
 </head>
 <body>
@@ -13,32 +16,128 @@
             <img class="logo" src="/front/img/logo.webp" alt="">
 
             <p class="title">Select your name</p>
-            <select name="" id="name-input">
-                <option value="-">Select your name</option>
-                <option value="Luisa Tapiero">Luisa Tapiero</option>
-                <option value="Juan José Rodriguez">Juan José Rodriguez</option>
-                <option value="Christian Aparicio">Christian Aparicio</option>
-            </select>
-                
-            <h2>Number of Neighbors</h2>
-            <input type="number" placeholder="Number of neighbors" id="neighbor-input">
 
-            <h2>How Many Movies would you like us to recommend?</h2>
-            <input type="number" id="amount-input" placeholder="Number of movies">
+            <div class="content-select">
+                <select name="" id="name-input">
+                    <option value="-">Select your name</option>
+                    <option value="Luisa Tapiero">Luisa Tapiero</option>
+                    <option value="Juan José Rodriguez">Juan José Rodriguez</option>
+                    <option value="Christian Aparicio">Christian Aparicio</option>
+                    <option value="Juan Alejandro Solarte">Juan Alejandro Solarte</option>
+                    <option value="Valeria Martinez">Valeria Martinez</option>
+                    <option value="Melanie ospiria">Melanie ospiria</option>
+                    <option value="Andres Felipe santacruz">Andres Felipe santacruz</option>
+                    <option value="Daniela Viafara Delgado">Daniela Viafara Delgado</option>
+                    <option value="Guillermo Valencia Mosquera">Guillermo Valencia Mosquera</option>
+                    <option value="Isabella Rodríguez">Isabella Rodríguez</option>
+                    <option value="Daniela diaz">Daniela diaz</option>
+                    <option value="Sebastian Mosquera">Sebastian Mosquera</option>
+                    <option value="Santiago Valencia">Santiago Valencia</option>
+                    <option value="Andrea Torrente">Andrea Torrente</option>
+                    <option value="Lina Isabella Manjarrez Pantoja">Lina Isabella Manjarrez Pantoja</option>
+                    <option value="Juan Felipe Lenis Fajardo">Juan Felipe Lenis Fajardo</option>
+                    <option value="Carolina Velásquez">Carolina Velásquez</option>
+                    <option value="Orianna Pacini">Orianna Pacini</option>
+                    <option value="Daniela Martinez">Daniela Martinez</option>
+                    <option value="Daniela Marulanda">Daniela Marulanda</option>
+                    <option value="José Oscar Ponce Ospina">José Oscar Ponce Ospina</option>
+                    <option value="Isabella Cortes">Isabella Cortes</option>
+                    <option value="Juan Manuel Vargas Criollo">Juan Manuel Vargas Criollo</option>
+                    <option value="Juan Sebastián Silva">Juan Sebastián Silva</option>
+                    <option value="Santiago Gómez Melo">Santiago Gómez Melo</option>
+                    <option value="Mathews Alejandro Rotavisky Palomino">Mathews Alejandro Rotavisky Palomino</option>
+                    <option value="David zapata calvache">David zapata calvache</option>
+                    <option value="Juanita Piza Jaramillo">Juanita Piza Jaramillo</option>
+                    <option value="Natalia Martinez">Natalia Martinez</option>
+                    <option value="Martín Ronderos">Martín Ronderos</option>
+                    <option value="Martín Echeverri">Martín Echeverri</option>
+                    <option value="Vanessa Rivero">Vanessa Rivero</option>
+                    <option value="Tomasa Palacios Zapata">Tomasa Palacios Zapata</option>
+                    <option value="Diomira Rengifo Alban">Diomira Rengifo Alban</option>
+                    <option value="Daniel Caicedo">Daniel Caicedo</option>
+                    <option value="Juan Esteban Ramos">Juan Esteban Ramos</option>
+                    <option value="Luisa Maria Ledezma Cifuentes">Luisa Maria Ledezma Cifuentes</option>
+                    <option value="Catalina Giraldo Aguirre">Catalina Giraldo Aguirre</option>
+                    <option value="Lina María Peralta Delgado">Lina María Peralta Delgado</option>
+                    <option value="Luis Javier tapiero">Luis Javier tapiero</option>
+                    <option value="Jenny Villafañe">Jenny Villafañe</option>
+                    <option value="Danna Tapiero">Danna Tapiero</option>
+                    <option value="Diana Lara">Diana Lara</option>
+                    <option value="Salomé Ruiz Gallon">Salomé Ruiz Gallon</option>
+                    <option value="David Posso">David Posso</option>
+                    <option value="Natalia Jimenez Orozco">Natalia Jimenez Orozco</option>
+                    <option value="Viviana Rodriguez">Viviana Rodriguez</option>
+                    <option value="Ana Sofia Calle Cordoba">Ana Sofia Calle Cordoba</option>
+                    <option value="Sofia Ortega">Sofia Ortega</option>
+                </select>
+                <i></i>
+            </div>
+
+            <div class="n-neighbors">
+                <p>How many people with similar tastes to yours would you like us to consider for the recommendation?</p>
+                <div class="number-input">
+                    <button onclick="decreaseValue()">-</button>
+                        <input type="number" id="neighbor-input" value="0">
+                    <button onclick="increaseValue()">+</button>
+                </div>
+            </div>
+           
+            <div class="n-movies">
+                <p>How Many Movies would you like us to recommend?</p>
+                <div class="number-input">
+                    <button onclick="decreaseValue2()">-</button>
+                        <input type="number" id="amount-input" value="0">
+                    <button onclick="increaseValue2()">+</button>
+                </div>
+            </div>
             
-            <h2>Aggregation Method</h2>
-            <select name="" id="aggregation-dropdown">
-                <option value="-">-</option>
-                <option value="maximo">Maximum</option>
-                <option value="minimo">Minimum</option>
-                <option value="promedio">Average</option>
-                <option value="desviacion">Varianca</option>
-            </select>
+            <p class="type-n">What type of movies do you prefer for the recommendation?</p>
+            <div class="content-select">
+                <select name="" id="aggregation-dropdown">
+                    <option value="-">Select type of recommendation</option>
+                    <option value="maximo">Popularity: Popular movies among people with similar tastes to yours.</option>
+                    <option value="minimo">Specificity: Niche movies that match your more specific preferences.</option>
+                    <option value="promedio">Average: Movies based on the average opinion of people with similar tastes to yours.</option>
+                    <option value="desviacion">Variety: Greater diversity of movies based on the tastes of similar people to yours.</option>
+                </select>
+                <i></i>
+            </div>
 
-            <button id="recommendation-btn"> Recommend!</button>
+            <div class="button">
+                <button id="recommendation-btn"> Recommend!</button>
+            </div>
+            
     </section>
-
+   
         <section class="data-container" style="display: none;">
+            <div class="logo-container"><img class="logo2" src="/front/img/logo.webp" alt=""></div>     
+            <section class="position-container">
+                <div class="neighbor-container">
+                    <div class="position-left">
+                        <div class="card-left">
+                            <h5 class="up-part">People with similar taste</h5>
+                            <div class="info-cards" id="cards-neighbors"></div>                     
+                        </div>
+                    </div>
+
+                    <div class="position-right">
+                        <div class="card-right">
+                            <h5 class="down-part">Movie Recommendations</h5>
+                            <div class="info-cards2" id="cards-movies">                            
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="movies-container">
+
+                </div>
+            </section>
+
+            <div class="back-position">
+                <button class="back" onclick="backPage()">Back</button>
+            </div>
+
             <div id="result-data"></div>
 
             <section id="neighborhood"></section>
