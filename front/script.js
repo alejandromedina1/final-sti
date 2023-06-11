@@ -79,10 +79,24 @@ const postEndpoint = async (request) => {
             let resultHTML = '';
 
             for (let i = 0; i < response.resultados.length; i++) {
+                var numeroDecimal = response.resultados[i][1];
+                var decimales = 3;
+            
+                function decimalAPorcentaje(numeroDecimal, decimales) {
+                    const factor = Math.pow(10, decimales);
+                    const numeroAcortado = Math.round(numeroDecimal * factor) / factor;
+                    
+                    const porcentaje = numeroAcortado * 100;
+                    
+                    return porcentaje;
+                }
+
+                var porcentaje = decimalAPorcentaje(numeroDecimal, decimales);
+            
                 resultHTML += `<p>${response.resultados[i][0]}</p>`;
-                resultHTML += `<p>${response.resultados[i][1]}</p>`;
+                resultHTML += `<p>${porcentaje}%</p>`;
                 resultHTML += `<p>${response.vecinos[i]}</p>`;
-                
+                  
             }
 
             console.log(response.resultados);
