@@ -26,13 +26,13 @@ const sendRequest = async () => {
 
     console.log(userRequest)
 
-    function obtainUsers() {
+    /*function obtainUsers() {
         const app = document.getElementById('recommendations');
         app.innerHTML = `
         <p>"${userRequest.usuario}"</p>  `
     }
     
-    obtainUsers();
+    obtainUsers();*/
 
     function changeScreen() {
         var screen1 = document.querySelector('.data-filter');
@@ -70,12 +70,7 @@ const postEndpoint = async (request) => {
         result = response
 
         function obtainMovies() {
-            const app1 = document.getElementById('neighborhood');
-            app1.innerHTML = `
-            <p>"${response.resultados[0][0]}"</p>
-              `
-
-            const resultDataElement = document.getElementById('result-data');
+            const resultDataElement = document.getElementById('cards-neighbors');
             let resultHTML = '';
 
             for (let i = 0; i < response.resultados.length; i++) {
@@ -93,9 +88,14 @@ const postEndpoint = async (request) => {
 
                 var porcentaje = decimalAPorcentaje(numeroDecimal, decimales);
             
-                resultHTML += `<p>${response.resultados[i][0]}</p>`;
-                resultHTML += `<p>${porcentaje}%</p>`;
-                resultHTML += `<p>${response.vecinos[i]}</p>`;
+                //resultHTML += `<p>${response.resultados[i][0]}</p>`;
+                //resultHTML += `<p>${porcentaje}%</p>`;
+                resultHTML += `
+                                    <div class="neighbors-info">
+                                        <img src="/front/img/profile.png" alt="">
+                                        <p>${response.vecinos[i]}</p>
+                                    </div>`;
+                //resultHTML += `<p>${response.vecinos[i]}</p>`;
                   
             }
 
