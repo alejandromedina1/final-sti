@@ -1,0 +1,39 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    background-color: #212332;
+    background-image: url(/front/img/pelis.png);
+    background-repeat: no-repeat;
+    background-size: 30%;
+    color: white;
+}
+
+.data-filter {
+    margin-left: 40%;
+    margin-top: 10%;
+}
+
+.data-filter img{
+    width: 45%;
+}
+
+#name-input {
+    width: 80%;
+    height: 64px;
+    background: #373947;
+    border: 3px solid #212332;
+    box-shadow: -5px -5px 20px rgba(152, 152, 152, 0.09), 10px 20px 40px rgba(0, 0, 0, 0.25), inset -2px -2px 8px rgba(255, 255, 255, 0.08), inset 4px 4px 20px rgba(0, 0, 0, 0.19);
+    border-radius: 46.5px;
+    color: #868686;
+
+}
+
+.title {
+    margin-top: 5px;
+    margin-bottom: 20px;
+}

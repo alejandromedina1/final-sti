@@ -26,17 +26,33 @@ const sendRequest = async () => {
 
     console.log(userRequest)
 
-
     function obtainUsers() {
         const app = document.getElementById('recommendations');
         app.innerHTML = `
-        <p>"${userRequest.usuario}"</p>
-        <p>"${userRequest.vecinos}"</p>
-        <p>"${userRequest.aggregation}"</p>
-        <p>"${userRequest.N}"</p>  `
+        <p>"${userRequest.usuario}"</p>  `
     }
     
     obtainUsers();
+
+    function changeScreen() {
+        var screen1 = document.querySelector('.data-filter');
+        var screen2 = document.querySelector('.data-container');
+        var body = document.body;
+
+        if (screen1.style.display === "none") {
+            screen1.style.display = "block";
+            screen2.style.display = "none";
+            body.style.backgroundImage = ""; 
+            
+          } else {
+            screen1.style.display = "none";
+            screen2.style.display = "block";
+            body.style.backgroundImage = "none"; 
+          }
+       
+    };
+
+    changeScreen();
 }
 
 
@@ -65,6 +81,7 @@ const postEndpoint = async (request) => {
             for (let i = 0; i < response.resultados.length; i++) {
                 resultHTML += `<p>${response.resultados[i][0]}</p>`;
                 resultHTML += `<p>${response.resultados[i][1]}</p>`;
+                resultHTML += `<p>${response.vecinos[i]}</p>`;
                 
             }
 
@@ -72,7 +89,6 @@ const postEndpoint = async (request) => {
 
             resultDataElement.innerHTML = resultHTML;
         }
-        
         
         obtainMovies();
         

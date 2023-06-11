@@ -4,43 +4,50 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>MoviePals</title>
 </head>
 <body>
-    <h1>MoviePals</h1>
+<main>
+    <section class="data-filter">
+            <img class="logo" src="/front/img/logo.webp" alt="">
 
-    <h2>Select your name</h2>
-    <select name="" id="name-input">
-        <option value="-">-</option>
-        <option value="Luisa Tapiero">Luisa Tapiero</option>
-        <option value="Juan José Rodriguez">Juan José Rodriguez</option>
-        <option value="Christian Aparicio">Christian Aparicio</option>
-    </select>
+            <p class="title">Select your name</p>
+            <select name="" id="name-input">
+                <option value="-">Select your name</option>
+                <option value="Luisa Tapiero">Luisa Tapiero</option>
+                <option value="Juan José Rodriguez">Juan José Rodriguez</option>
+                <option value="Christian Aparicio">Christian Aparicio</option>
+            </select>
+                
+            <h2>Number of Neighbors</h2>
+            <input type="number" placeholder="Number of neighbors" id="neighbor-input">
 
-    <h2>Number of Neighbors</h2>
-    <input type="number" placeholder="Number of neighbors" id="neighbor-input">
+            <h2>How Many Movies would you like us to recommend?</h2>
+            <input type="number" id="amount-input" placeholder="Number of movies">
+            
+            <h2>Aggregation Method</h2>
+            <select name="" id="aggregation-dropdown">
+                <option value="-">-</option>
+                <option value="maximo">Maximum</option>
+                <option value="minimo">Minimum</option>
+                <option value="promedio">Average</option>
+                <option value="desviacion">Varianca</option>
+            </select>
 
-    <h2>How Many Movies would you like us to recommend?</h2>
-    <input type="number" id="amount-input" placeholder="Number of movies">
-    
-    <h2>Aggregation Method</h2>
-    <select name="" id="aggregation-dropdown">
-        <option value="-">-</option>
-        <option value="maximo">Maximum</option>
-        <option value="minimo">Minimum</option>
-        <option value="promedio">Average</option>
-        <option value="desviacion">Varianca</option>
-    </select>
+            <button id="recommendation-btn"> Recommend!</button>
+    </section>
 
-    <button id="recommendation-btn"> Recommend!</button>
+        <section class="data-container" style="display: none;">
+            <div id="result-data"></div>
 
-    <div id="result-data"></div>
+            <section id="neighborhood"></section>
 
-    <section id="neighborhood"></section>
+            <section id="recommendations"></section>
+        </section>
+</main>        
 
-    <section id="recommendations"></section>
-
-</body>
+    </body>
 
 <script src="script.js"></script>
 </html>
