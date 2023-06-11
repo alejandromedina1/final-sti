@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Gothic A1', sans-serif;
 }
 
 
@@ -22,18 +23,75 @@ body {
     width: 45%;
 }
 
-#name-input {
-    width: 80%;
-    height: 64px;
+/* Select */
+
+.content-select select{
+	appearance: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+}
+
+.content-input input,
+.content-select select{
+	appearance: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+}
+
+.content-select select::-ms-expand {
+    display: none;
+}
+
+.content-select{
+	max-width: 70%;
+	position: relative;
+}
+ 
+.content-select select{
+	display: inline-block;
+	width: 100%;
+	cursor: pointer;
+  	padding: 7px 10px;
+  	height: 42px;
+  	outline: 0; 
+  	border: 0;
     background: #373947;
     border: 3px solid #212332;
     box-shadow: -5px -5px 20px rgba(152, 152, 152, 0.09), 10px 20px 40px rgba(0, 0, 0, 0.25), inset -2px -2px 8px rgba(255, 255, 255, 0.08), inset 4px 4px 20px rgba(0, 0, 0, 0.19);
     border-radius: 46.5px;
-    color: #868686;
-
+	font-size: 1em;
+	color: #999;
+	font-family: 
+	'Quicksand', sans-serif;
+    position: relative;
+    transition: all 0.25s ease;
 }
+ 
+.content-select select:hover{
+	background: rgb(40, 41, 51);
+}
+
+.content-select i{
+	position: absolute;
+	right: 20px;
+	top: calc(50% - 6px);
+	width: 8px;
+	height: 8px;
+	display: block;
+	border-left:2px solid #8864E9;
+	border-bottom:2px solid #8864E9;
+	transform: rotate(-45deg); /* Giramos el cuadrado */
+	transition: all 0.25s ease;
+}
+ 
+.content-select:hover i{
+	margin-top: 3px;
+}
+
 
 .title {
     margin-top: 5px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+    color: #ECECEC;
+    font-size: 16px;
 }
