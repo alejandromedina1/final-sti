@@ -8,7 +8,7 @@
 
 body {
     background-color: #212332;
-    /*background-image: url(/front/img/pelis.png)*/;
+    background-image: url(/front/img/pelis.png);
     background-repeat: no-repeat;
     background-size: 30%;
     color: white;
@@ -165,18 +165,23 @@ body {
 
 .info-cards {
 	width: 577px;
-	height: 100%;
+	max-width: 577px;
+	display: flex;
+	flex-wrap: wrap;
+    justify-content: flex-start;
+	margin: 0 auto;
+	height: 90%;
 	background: #212332;
 	box-shadow: -4.55922px -4.55922px 18.2369px rgba(152, 152, 152, 0.06), 9.11844px 18.2369px 36.4737px rgba(0, 0, 0, 0.25);
 	border-radius: 17px;
-	padding: 10px 10px;
+	padding: 10px 0 10px 10px;
 	border-top-right-radius: 0;
 	border-top-left-radius: 0;
 }
 
 .info-cards2 {
 	width: 577px;
-	height: 100%;
+	height: 80%;
 	background: #212332;
 	box-shadow: -4.55922px -4.55922px 18.2369px rgba(152, 152, 152, 0.06), 9.11844px 18.2369px 36.4737px rgba(0, 0, 0, 0.25);
 	border-radius: 17px;
@@ -194,12 +199,13 @@ body {
 	display: flex;
 	align-items: center;
 	padding: 20px 10px;
-	width: 50%;
+	width: 47%;
 	height: 70px;
 	background: #212332;
 	box-shadow: -4.55922px -4.55922px 18.2369px rgba(152, 152, 152, 0.09), 9.11844px 18.2369px 36.4737px rgba(0, 0, 0, 0.25), inset -2px -2px 4px rgba(255, 255, 255, 0.06), inset 2px 2px 4px rgba(0, 0, 0, 0.14);
 	border-radius: 17px;
 	margin: 3% 0;
+	margin-right: 15px;
 }
 
 .neighbors-movie {
@@ -242,5 +248,30 @@ body {
 
 .info-percent h6 {
 	font-size: 20px;
+}
+
+.back-position {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 5%;
+	margin-bottom: 5%;
+}
+
+.back {
+	width: 200px;
+	height: 64px;
+	background: linear-gradient(127.77deg, #A66AEA -34.93%, #685DE7 148.63%);
+	box-shadow: 0px 10px 20px rgba(111, 101, 232, 0.12);
+	border-radius: 32px;
+	border: none;
+	cursor: pointer;
+	color: white;
+	font-size: 20px;
+}
+
+.back:hover {
+	background: linear-gradient(127.77deg, #852aec -34.93%, #685DE7 148.63%);
+	transition: all 0.90s ease;	
 }
 

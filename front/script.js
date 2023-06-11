@@ -71,7 +71,9 @@ const postEndpoint = async (request) => {
 
         function obtainMovies() {
             const resultDataElement = document.getElementById('cards-neighbors');
+            const resultDataElement2 = document.getElementById('cards-movies');
             let resultHTML = '';
+            let resultHTML2 = '';
 
             for (let i = 0; i < response.resultados.length; i++) {
                 var numeroDecimal = response.resultados[i][1];
@@ -95,6 +97,18 @@ const postEndpoint = async (request) => {
                                         <img src="/front/img/profile.png" alt="">
                                         <p>${response.vecinos[i]}</p>
                                     </div>`;
+                resultHTML2 += `
+                <div class="neighbors-movie">
+                    <div class="info-movie">
+                        <img src="/front/img/star.png" alt="">
+                        <p>${response.resultados[i][0]}</p>
+                    </div>
+
+                    <div class="info-percent">
+                        <h6>${porcentaje}%</h6>
+                        <p>Recommended</p>
+                    </div>
+                </div>`;
                 //resultHTML += `<p>${response.vecinos[i]}</p>`;
                   
             }
@@ -102,8 +116,9 @@ const postEndpoint = async (request) => {
             console.log(response.resultados);
 
             resultDataElement.innerHTML = resultHTML;
+            resultDataElement2.innerHTML = resultHTML2;
         }
-        
+
         obtainMovies();
         
     } catch (error) {
@@ -112,6 +127,9 @@ const postEndpoint = async (request) => {
 
 }
 
+function backPage() {
+    location.reload(); 
+  }
 
 const getResult = async () => {
     try {

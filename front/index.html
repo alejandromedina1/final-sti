@@ -12,7 +12,7 @@
 </head>
 <body>
 <main>
-    <section class="data-filter" style="display: none;">
+    <section class="data-filter">
             <img class="logo" src="/front/img/logo.webp" alt="">
 
             <p class="title">Select your name</p>
@@ -101,28 +101,21 @@
             
     </section>
    
-        <section class="data-container">
+        <section class="data-container" style="display: none;">
             <div class="logo-container"><img class="logo2" src="/front/img/logo.webp" alt=""></div>     
             <section class="position-container">
                 <div class="neighbor-container">
-                    <div class="card-left">
-                        <h5 class="up-part">People with similar taste</h5>
-                        <div class="info-cards" id="cards-neighbors"></div>                     
+                    <div class="position-left">
+                        <div class="card-left">
+                            <h5 class="up-part">People with similar taste</h5>
+                            <div class="info-cards" id="cards-neighbors"></div>                     
+                        </div>
                     </div>
 
-                    <div class="card-right">
-                        <h5 class="down-part">Movie Recommendations</h5>
-                        <div class="info-cards2" id="cards-movies">
-                            <div class="neighbors-movie">
-                                <div class="info-movie">
-                                    <img src="/front/img/star.png" alt="">
-                                    <p>${response.vecinos[i]}</p>
-                                </div>
-
-                                <div class="info-percent">
-                                    <h6>97%</h6>
-                                    <p>Recommended</p>
-                                </div>
+                    <div class="position-right">
+                        <div class="card-right">
+                            <h5 class="down-part">Movie Recommendations</h5>
+                            <div class="info-cards2" id="cards-movies">                            
                             </div>
                         </div>
                     </div>
@@ -132,6 +125,11 @@
 
                 </div>
             </section>
+
+            <div class="back-position">
+                <button class="back" onclick="backPage()">Back</button>
+            </div>
+
             <div id="result-data"></div>
 
             <section id="neighborhood"></section>
