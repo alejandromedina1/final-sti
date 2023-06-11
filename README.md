@@ -1,5 +1,4 @@
 Installation
-
  Clone the repo
  Create environment: python3 -m venv venv
  Activate environment: source venv/bin/activate
