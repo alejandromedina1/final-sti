@@ -123,11 +123,7 @@ const postEndpoint = async (request) => {
             
                 //resultHTML += `<p>${response.resultados[i][0]}</p>`;
                 //resultHTML += `<p>${porcentaje}%</p>`;
-                resultHTML += `
-                                    <div class="neighbors-info">
-                                        <img src="/front/img/profile.png" alt="">
-                                        <p>${response.vecinos[i]}</p>
-                                    </div>`;
+                
                 resultHTML2 += `
                 <div class="neighbors-movie">
                     <div class="info-movie">
@@ -143,6 +139,33 @@ const postEndpoint = async (request) => {
                 //resultHTML += `<p>${response.vecinos[i]}</p>`;
                   
             }
+            for (let i = 0; i < response.vecinos.length; i++) {
+                var numeroDecimal = response.vecinos[i][1];
+                var decimales = 3;
+            
+                function decimalAPorcentaje(numeroDecimal, decimales) {
+                    const factor = Math.pow(10, decimales);
+                    const numeroAcortado = Math.round(numeroDecimal * factor) / factor;
+                    
+                    const porcentaje = numeroAcortado * 100;
+                    
+                    return porcentaje;
+                }
+
+                var porcentaje = decimalAPorcentaje(numeroDecimal, decimales);
+            
+                //resultHTML += `<p>${response.resultados[i][0]}</p>`;
+                //resultHTML += `<p>${porcentaje}%</p>`;
+                resultHTML += `
+                                    <div class="neighbors-info">
+                                        <img src="/front/img/profile.png" alt="">
+                                        <p>${response.vecinos[i]}</p>
+                                    </div>`;
+                //resultHTML += `<p>${response.vecinos[i]}</p>`;
+                  
+            }
+
+
 
             console.log(response.resultados);
 

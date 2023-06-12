@@ -124,7 +124,7 @@ def create_data():
     categorias_cumplen_requisito = obtener_categorias(df_usuarios, protopersona, metodo_aggregation)
     print(categorias_cumplen_requisito)
 
-    df_peliculas = pd.read_csv('recommendations.csv')
+    df_peliculas = pd.read_csv('prueba.csv')
     print(df_peliculas)
 
     # Crear una lista con los nombres de los géneros
@@ -173,7 +173,8 @@ def create_data():
     proto_generos = merged_data.loc[merged_data["movie_name"] == "Proto-pelicula", "genre"].iloc[0]
 
     # Ajustar las dimensiones de las listas de géneros de las películas
-    merged_data["genre"] = merged_data["genre"].apply(lambda x: x[:len(proto_generos)] if len(x) > len(proto_generos) else x + [0.5] * (len(proto_generos) - len(x)))
+    merged_data["genre"] = merged_data["genre"].apply(lambda x: x[:len(proto_generos)] + [0.5] * (len(proto_generos) - len(x)) if len(x) < len(proto_generos) else x[:len(proto_generos)])
+
 
     # Mostrar el dataframe actualizado
     print(merged_data)
