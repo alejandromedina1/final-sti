@@ -123,15 +123,13 @@ const postEndpoint = async (request) => {
             
                 //resultHTML += `<p>${response.resultados[i][0]}</p>`;
                 //resultHTML += `<p>${porcentaje}%</p>`;
-<<<<<<< HEAD
-                
-=======
+
                 resultHTML += `
                 <div class="neighbors-info">
                     <img src="/front/img/profile.png" alt="">
                     <p>${response.vecinos[i]}</p>
                 </div>`;
->>>>>>> c063dad099e845667074255c0c5bd35b190157a1
+
                 resultHTML2 += `
                 <div class="neighbors-movie">
                     <div class="info-movie">
