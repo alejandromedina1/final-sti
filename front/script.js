@@ -108,7 +108,7 @@ const postEndpoint = async (request) => {
 
             for (let i = 0; i < response.resultados.length; i++) {
                 var numeroDecimal = response.resultados[i][1];
-                var decimales = 3;
+                var decimales = 2;
             
                 function decimalAPorcentaje(numeroDecimal, decimales) {
                     const factor = Math.pow(10, decimales);
@@ -123,7 +123,15 @@ const postEndpoint = async (request) => {
             
                 //resultHTML += `<p>${response.resultados[i][0]}</p>`;
                 //resultHTML += `<p>${porcentaje}%</p>`;
+<<<<<<< HEAD
                 
+=======
+                resultHTML += `
+                <div class="neighbors-info">
+                    <img src="/front/img/profile.png" alt="">
+                    <p>${response.vecinos[i]}</p>
+                </div>`;
+>>>>>>> c063dad099e845667074255c0c5bd35b190157a1
                 resultHTML2 += `
                 <div class="neighbors-movie">
                     <div class="info-movie">
